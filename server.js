@@ -2,23 +2,28 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();  // Load environment variables
 
 const app = express();
-app.use(express.json());  // Parse incoming JSON requests
-app.use(cors());  // Allow cross-origin requests
+app.use(cors());  // Allow frontend-backend communication
+app.use(express.json());  // Parse JSON request bodies
 
-// Connect to MongoDB
-mongoose.connect("mongodb+srv://mypc07866: mypc07866@cluster0.qhulw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-    .then(() => console.log("✅ MongoDB Connected Successfully!"))
-    .catch(err => console.log("❌ MongoDB Connection Error:", err));
+// ✅ Improved MongoDB Connection with Error Handling
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log("✅ MongoDB Connected Successfully!");
+    } catch (error) {
+        console.error("❌ MongoDB Connection Error:", error);
+        process.exit(1); // Exit process with failure
+    }
+};
+connectDB();
 
-// API Routes
-app.use("/api/auth", authRoutes);
-
-// Test Route
 app.get("/", (req, res) => {
     res.send("API is Running...");
 });

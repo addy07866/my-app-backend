@@ -6,15 +6,15 @@ import cors from "cors";
 dotenv.config();  // Load environment variables
 
 const app = express();
-app.use(cors());  // Allow frontend-backend communication
+app.use(cors());  // Enable frontend-backend communication
 app.use(express.json());  // Parse JSON request bodies
 
-// ✅ Improved MongoDB Connection with Error Handling
+// ✅ Connect MongoDB Atlas
 const connectDB = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URI, {
             useNewUrlParser: true,
-            useUnifiedTopology: true,
+            useUnifiedTopology: true
         });
         console.log("✅ MongoDB Connected Successfully!");
     } catch (error) {

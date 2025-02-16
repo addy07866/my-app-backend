@@ -28,6 +28,8 @@ router.post("/login", async (req, res) => {
     res.json({ token });
 });
 
-router.get("/testing",async()=>console.log("Testing Adnan....."););
+router.get("/api/message", (req, res) => {
+    res.json({ message: "Hello from the backend!" });
+});
 
 export default router;

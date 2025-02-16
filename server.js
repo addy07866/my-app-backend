@@ -11,7 +11,7 @@ app.use(express.json());  // Parse incoming JSON requests
 app.use(cors());  // Allow cross-origin requests
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/")
+mongoose.connect("mongodb://localhost:27017/testing")
     .then(() => console.log("✅ MongoDB Connected Successfully!"))
     .catch(err => console.log("❌ MongoDB Connection Error:", err));
 

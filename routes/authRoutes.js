@@ -28,7 +28,7 @@ router.post("/login", async (req, res) => {
     res.json({ token });
 });
 
-router.get("/api/message", (req, res) => {
+router.get("/testing", (req, res) => {
     res.json({ message: "Hello from the backend!" });
 });
 
